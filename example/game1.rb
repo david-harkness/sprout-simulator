@@ -22,7 +22,8 @@ def get_settings_for_day(plant)
   PlantReducer.wait_for_tomorrow(plant)
 end
 
-plant = BasicPlant.new
+# plant = BasicPlant.new
+plant = BambooPlant.new
 
 begin
   MenuMethods.setup_screen

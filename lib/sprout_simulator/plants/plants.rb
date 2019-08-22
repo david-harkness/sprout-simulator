@@ -1,5 +1,7 @@
 require 'sprout_simulator/plants/basic_plant'
+require 'sprout_simulator/plants/bamboo_plant'
 require 'sprout_simulator/plants/plant_reducer'
+require 'sprout_simulator/plants/plant_calculation'
 
 module SproutSimulator::Plants
   # Poor man's type system

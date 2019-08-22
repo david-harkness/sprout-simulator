@@ -5,7 +5,9 @@ module SproutSimulator::Plants
     # Define actions
     def self.adjust_settings(plant, hours:, intensity:, food:, water:)
       new_plant = plant.new_clone
-      new_plant.health = new_plant.calculate_health(hours: hours, intensity: intensity, food: food, water: water)
+      new_plant.health = PlantCalculation.calculate_health(
+          new_plant.plant_attributes, health: plant.health, hours: hours, intensity: intensity, food: food, water: water
+      )
       new_plant
     end
 
