@@ -5,7 +5,7 @@ module SproutSimulator::Plants
     # TODO: move to reducer
     # TODO: should be NotImplemented. Let subclasses calculate
     # math probably needs work, this is business logic, define elsewhere
-    def self.calculate_health(plant, health: health, hours: 0, intensity: 0, food: 0, water: 0)
+    def self.calculate_health(plant, health: , hours: 0, intensity: 0, food: 0, water: 0)
       duration = 1.0 - (hours - plant.ideal_light_hours).abs.to_f / plant.ideal_light_hours.to_f
       intensity_health = 1.0 - (intensity - plant.ideal_light_intensity).abs / plant.ideal_light_intensity.to_f
 

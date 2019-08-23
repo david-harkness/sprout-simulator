@@ -11,8 +11,8 @@ module SproutSimulator::Plants
     # Maybe do this as a set of constants
     def _setup_defaults
       @plant.max_growth_rate = 200
-      @plant.current_health = 30
-      @plant.ideal_water = 20
+      @plant.current_health ||= 30
+      @plant.ideal_water = 2
       @plant.ideal_light_intensity = 9
       @plant.ideal_light_hours = 24
     end

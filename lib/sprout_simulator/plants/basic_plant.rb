@@ -43,6 +43,7 @@ module SproutSimulator::Plants
     end
 
     # For Reducer
+    # #TODO: look at uuid it's probably broken
     def new_clone
       self.class.new(plant: @plant.to_h, existing_uuid: @uuid)
     end

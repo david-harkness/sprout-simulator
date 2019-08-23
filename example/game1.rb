@@ -6,6 +6,16 @@ require './menu_methods'
 include Curses
 include SproutSimulator::Plants
 
+# Debug method
+def test_without_graphics(plant)
+  PlantReducer.wait_for_tomorrow(plant)
+  plant = PlantReducer.adjust_settings(plant, water: 1, food: 0, intensity: 1, hours: 1)
+  puts "Health #{plant.health}, Height #{plant.height}, Age, #{plant.age}, is_dead: #{plant.is_dead?}"
+
+  plant = PlantReducer.adjust_settings(plant, water: 1, food: 0, intensity: 1, hours: 1)
+  puts "Health #{plant.health}, Height #{plant.height}, Age, #{plant.age}, is_dead: #{plant.is_dead?}"
+  exit
+end
 
 # Input Light Intensity, Light Duration, Food & water
 # Plant health will change each day and grow based on health
@@ -29,7 +39,9 @@ begin
   MenuMethods.setup_screen
   MenuMethods.show_plant_information(plant.to_s)
   while(true)
+    # test_without_graphics(plant)
     plant = get_settings_for_day(plant)
+
     if plant.is_dead?
       MenuMethods.set_log_box("Plant is dead. You have failed.")
       sleep 5
@@ -40,6 +52,7 @@ begin
 ensure
   Curses.close_screen
 end
+
 
 
 # Testing Logic (comment out while loop), also move to rspec
