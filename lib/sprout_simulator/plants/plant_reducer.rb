@@ -3,10 +3,17 @@ module SproutSimulator::Plants
   # Idea being, that nothing modifies internal state of a Plant.
   module PlantReducer
     # Define actions
+    def self.harvest
+      # TODO:
+    end
+    def self.pesticide
+      # TODO:
+    end
+
     def self.adjust_settings(plant, hours:, intensity:, food:, water:)
       new_plant = plant.new_clone
       new_plant.health = PlantCalculation.calculate_health(
-          new_plant.plant_attributes, health: plant.health, hours: hours, intensity: intensity, food: food, water: water
+          plant: plant, hours: hours, intensity: intensity, food: food, water: water
       )
       new_plant
     end

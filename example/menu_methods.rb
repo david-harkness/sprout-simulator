@@ -6,11 +6,16 @@
 module MenuMethods
   include Curses
   class << self
-    def show_plant_information(message)
+
+    def show_plant_box(message, top)
+
+    end
+
+    def show_plant_information(message, top)
       messages = message.split("\n")
       height = messages.count + 4
       width  = messages.map(&:length).max + 22
-      top    = 2
+      # top    = plant_index == 0 ? 2 : 20 #horrible
       left   = 55
       win = Curses::Window.new(height, width, top, left)
       win.box("*", "*")
@@ -52,10 +57,12 @@ module MenuMethods
       item1 = "Hours of Light (0-24)  : "
       item2 = "Light Intensity (0-10) : "
       item3 = "Water Units (0-500)    : "
+      item4 = "Plant Food  (1-1000)   : "
+      item5 = "Harvest (0-1)          : "
 
 
       answers = []
-      [item1, item2, item3].each_with_index do |m, index |
+      [item1, item2, item3, item4, item5].each_with_index do |m, index |
         win.setpos(2 + index, 3)
         win.addstr(m)
         win.refresh
@@ -63,8 +70,7 @@ module MenuMethods
       end
       win.close
       set_log_box("You have been eaten by a Grue") if answers[1] == "0"
-      answers
-      {hours: answers[0].to_i, intensity: answers[1].to_i, water: answers[2].to_i}
+      {hours: answers[0].to_i, intensity: answers[1].to_i, water: answers[2].to_i, food: answers[3].to_i}
     end
 
     def setup_screen

@@ -25,28 +25,40 @@ end
 # Using Reducer to allow for eventual parallelization of plant calculations
 
 # Main Loop
-def get_settings_for_day(plant)
-  MenuMethods.show_plant_information(plant.to_s)
-  answers = MenuMethods.show_menu
-  plant = PlantReducer.adjust_settings(plant, water: answers[:water], food: 0, intensity: answers[:intensity], hours: answers[:hours])
-  PlantReducer.wait_for_tomorrow(plant)
+def get_settings_for_day
+  MenuMethods.show_menu
 end
 
+
+
 # plant = BasicPlant.new
-plant = BambooPlant.new
+
+greenhouse = [
+   BambooPlant.new,
+   BasicPlant.new,
+]
 
 begin
-  MenuMethods.setup_screen
-  MenuMethods.show_plant_information(plant.to_s)
+  # MenuMethods.setup_screen
+  # MenuMethods.show_plant_information(plant.to_s)
   while(true)
-    # test_without_graphics(plant)
-    plant = get_settings_for_day(plant)
+    # test_without_graphics(plant); exit
 
-    if plant.is_dead?
-      MenuMethods.set_log_box("Plant is dead. You have failed.")
-      sleep 5
-      break
+    MenuMethods.show_plant_information(greenhouse[0].to_s, 2)
+    MenuMethods.show_plant_information(greenhouse[1].to_s, 20)
+
+    answers = get_settings_for_day
+
+    greenhouse.each_with_index do |plant, index|
+      plant             = PlantReducer.adjust_settings(plant, water: answers[:water], food: answers[:food], intensity: answers[:intensity], hours: answers[:hours])
+      greenhouse[index] = PlantReducer.wait_for_tomorrow(plant)
     end
+
+    # if plant.is_dead?
+    #   MenuMethods.set_log_box("Plant is dead. You have failed.")
+    #   sleep 5
+    #   break
+    # end
     sleep 0.5
   end
 ensure
