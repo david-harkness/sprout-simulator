@@ -5,8 +5,22 @@
 #
 module MenuMethods
   include Curses
+  include SproutSimulator::Plants
   class << self
 
+    def render_item(txt, top, left)
+      messages = txt.split("\n")
+      height = messages.count + 4
+      width  = messages.map(&:length).max + 42
+      win = Curses::Window.new(height, width, top, left)
+      # win.box("", "")
+      messages.each_with_index do |m, index |
+        win.setpos(2 + index, 8)
+        win.addstr(m)
+      end
+      win.refresh
+      win.close
+    end
     def show_plant_box(plant, top)
       messages = plant.split("\n")
       height = messages.count + 4
@@ -86,29 +100,30 @@ module MenuMethods
     def setup_screen
       Curses.init_screen
       Curses.cbreak
-      Curses.stdscr.keypad = true
+      Curses.stdscr.keypad = false
       # Curses.setpos((Curses.lines - 1) / 2, (Curses.cols - 11) / 2)
     end
 
 
     # Render Text Plant
-    def show_plant
-      render_sun_motion
+
+    def twinkle_star(left)
+      2.times.each do |i|
+        render_item(SproutSimulator::Plants::SUN3, 0, left)
+        sleep 0.05
+        render_item(SproutSimulator::Plants::SUN4, 0, left)
+        sleep 0.05
+        Curses.clear
+        Curses.refresh
+      end
     end
 
     def render_sun_motion
-      3.times.each do |i|
-        if i % 3 == 0
-          show_plant_box(SproutSimulator::Plants::SUN3, i+10)
-        elsif i % 3 == 1
-          show_plant_box(SproutSimulator::Plants::SUN2, i+10)
-        else
-          show_plant_box(SproutSimulator::Plants::SUN1, i+10)
-        end
-        sleep 0.5
-        Curses.clear
-        Curses.refresh
-
+      steps = 10
+      sWidth = (Curses.cols - 11)
+      columns = sWidth / steps
+      steps.times.each do |step|
+        twinkle_star(columns*step)
       end
     end
 
