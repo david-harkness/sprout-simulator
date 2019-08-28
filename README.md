@@ -21,6 +21,7 @@ And always beware, Grues love dark places
 ## TODO
 ### GamePlay
 * Calculate all plants in parallel
+* Add Menu Option on number of days to wait
 * Allow harvesting of plants.
 * Display more than 2 plants.
 * Add Max Height to Plants

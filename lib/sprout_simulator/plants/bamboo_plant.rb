@@ -2,14 +2,12 @@ module SproutSimulator::Plants
   class BambooPlant < BasicPlant
 
     DEFAULT_HEIGHT = 0
-    DEFAULT_HEALTH = 70
+    DEFAULT_HEALTH = 60
     DEFAULT_AGE    = 0
 
-    # TODO: needs working, not liking overriding
-    def initialize(health: nil, age: nil, height: nil, existing_uuid: nil) # ostruct would be nice
+    def initialize(health: nil, age: nil, height: nil, existing_uuid: nil)
       @designation = 'Bamboo'
-      @health      = health || DEFAULT_HEALTH # Change starting Health for this plant
-      super(health: health, age: age, height: height, existing_uuid: existing_uuid)
+      super(health: health || DEFAULT_HEALTH, age: age, height: height, existing_uuid: existing_uuid)
       _override_care_defaults # Change Care Instructions # TODO: Refactor
     end
 
