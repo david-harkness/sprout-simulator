@@ -39,5 +39,8 @@ rvm install "ruby-2.6.3"
 
 bundle install
 
+## Testing
+bundle exec rspec   
+
 ## Run
 cd example && ruby game1.rb

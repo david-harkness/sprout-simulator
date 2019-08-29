@@ -6,6 +6,7 @@
 
 require "bundler/setup"
 require "sprout_simulator"
+require 'parallel'
 require 'curses'
 require './menu_methods'
 
@@ -21,8 +22,9 @@ class ExampleGame
   def play!
     setup_and_teardown do
       while some_plants_live?
-        calculate_and_age_plants(MenuMethods.grab_input)
-        sleep 0.5
+        # TODO: 50,000 objects?
+        @greenhouse = calculate_and_age_plants(MenuMethods.grab_input)
+        sleep 0.2
         MenuMethods.render_sun_motion
         render_greenhouse
       end
@@ -47,11 +49,22 @@ class ExampleGame
     end
   end
 
+  # TODO: delete
+  # def calculate_and_age_plants(answers)
+  #   @greenhouse.each_with_index do |plant, index|
+  #     plant             = PlantReducer.plant_with_new_health(plant, water: answers[:water], food: answers[:food], intensity: answers[:intensity], hours: answers[:hours])
+  #     greenhouse[index] = PlantReducer.wait_for_tomorrow(plant)
+  #   end
+  # end
+
+  # TODO: code so 50,000 is not loaded all at once
   def calculate_and_age_plants(answers)
-    @greenhouse.each_with_index do |plant, index|
-      plant             = PlantReducer.plant_with_new_health(plant, water: answers[:water], food: answers[:food], intensity: answers[:intensity], hours: answers[:hours])
-      greenhouse[index] = PlantReducer.wait_for_tomorrow(plant)
+    results = Parallel.map(@greenhouse, in_processes: @greenhouse.count) do |old_plant|
+      sleep 2
+      tmp_plant             = PlantReducer.plant_with_new_health(old_plant, water: answers[:water], food: answers[:food], intensity: answers[:intensity], hours: answers[:hours])
+      PlantReducer.wait_for_tomorrow(tmp_plant)
     end
+    results # DELETE later
   end
 
   # Screen Setup and TearDown
