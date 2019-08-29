@@ -35,11 +35,16 @@ module SproutSimulator::Plants
     end
 
     def calculate_growth
-      ((@health / 100.0) * @care.max_growth_rate).to_i
+      ((@health / 100.0) * @care.max_growth_rate * random_growth).to_i
+    end
+
+    # Growth can be unpredictable
+    def random_growth
+      rand(0.75..1.25)
     end
 
     def to_s # Note: Move to a presenter
-      %"#{@designation}\n #{_print_attributes}\n"
+      %"#{@designation}: #{@uuid}\n #{_print_attributes}\n"
     end
 
     # For Reducer
@@ -57,12 +62,9 @@ module SproutSimulator::Plants
     private
 
     def _print_attributes # Note: Not a core function of class. Move to Presenter
-      %|
-       UUID: #{@uuid}
-       Health : #{is_dead? ? "Dead" : health.to_s + '%'}
-       Height : #{height.to_f / 10 } centimeters
-       Age    : #{age} days old
-      |
+      %| Health : #{is_dead? ? "Dead" : health.to_s + '%'}
+  Height : #{height.to_f / 10 } centimeters
+  Age    : #{age} days old|
     end
   end
 end

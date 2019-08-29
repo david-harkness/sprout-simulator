@@ -37,15 +37,15 @@ module MenuMethods
     end
     def show_plant_information(message, top)
       messages = message.split("\n")
-      height = messages.count + 4
-      width  = messages.map(&:length).max + 2
-      left   = 55
+      height = messages.count + 2
+      width  = 55
+      left   = 53
       win = Curses::Window.new(height, width, top, left)
       win.box("*", "*")
       win.setpos(0, 6)
       win.addstr("Plant Status")
       messages.each_with_index do |m, index |
-        win.setpos(2 + index, 3)
+        win.setpos(1 + index, 3)
         win.addstr(m)
       end
       win.refresh

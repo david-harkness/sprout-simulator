@@ -1,9 +1,10 @@
 require 'spec_helper'
 RSpec.describe SproutSimulator::Plants::PlantReducer do
+  context ""
   context "plant_with_new_health" do
-    let(:plant1) { SproutSimulator::Plants::BambooPlant.new }
+    let(:bamboo) { SproutSimulator::Plants::BambooPlant.new }
     it "should have health of 60" do
-      expect(plant1.health).to eq(60)
+      expect(bamboo.health).to eq(60)
     end
   end
 

@@ -5,6 +5,9 @@ plants = [
     BambooPlant.new,
     BasicPlant.new,
     BambooPlant.new,
+    BambooPlant.new,
+    BasicPlant.new,
+    BambooPlant.new,
 ]
 
 # Let's play a game

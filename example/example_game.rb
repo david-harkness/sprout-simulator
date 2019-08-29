@@ -43,7 +43,7 @@ class ExampleGame
   # Render each plant. (not going to scale well beyond 4 or so)
   def render_greenhouse
     @greenhouse.each_with_index do |plant, i|
-      MenuMethods.show_plant_information(@greenhouse[i].to_s, 2 + i*12)
+      MenuMethods.show_plant_information(@greenhouse[i].to_s, 2 + i*7)
     end
   end
 
