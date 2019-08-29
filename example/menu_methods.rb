@@ -38,7 +38,7 @@ module MenuMethods
     def show_plant_information(message, top)
       messages = message.split("\n")
       height = messages.count + 4
-      width  = messages.map(&:length).max + 22
+      width  = messages.map(&:length).max + 2
       left   = 55
       win = Curses::Window.new(height, width, top, left)
       win.box("*", "*")
@@ -54,9 +54,9 @@ module MenuMethods
 
     def set_log_box(message)
       height = 3
-      width  = 80
-      top    = 25
-      left   = 10
+      width  = 40
+      top    = 1
+      left   = 5
       log_box= Curses::Window.new(height, width, top, left)
       log_box.box(".", ".")
       log_box.setpos(0, 6)

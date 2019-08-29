@@ -1,4 +1,5 @@
 require './example_game'
+
 # Our Collection of Plants
 plants = [
     BambooPlant.new,

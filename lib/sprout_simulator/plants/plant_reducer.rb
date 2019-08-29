@@ -6,6 +6,7 @@ module SproutSimulator::Plants
     def self.harvest
       # TODO:
     end
+
     def self.pesticide
       # TODO:
     end

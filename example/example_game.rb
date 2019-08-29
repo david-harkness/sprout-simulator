@@ -18,7 +18,6 @@ class ExampleGame
     @greenhouse = plants
   end
 
-
   def play!
     setup_and_teardown do
       while some_plants_live?
@@ -37,8 +36,8 @@ class ExampleGame
   end
 
   def end_game_condition!
-    MenuMethods.set_log_box("Everything in Greenhouse is dead. You have failed.")
-    sleep 3
+    MenuMethods.set_log_box("All Plants are Dead.")
+    sleep 2
   end
 
   # Render each plant. (not going to scale well beyond 4 or so)
@@ -63,10 +62,7 @@ class ExampleGame
       yield
     ensure
       MenuMethods.teardown_screen
-      puts "\n" * 2
-      puts "\n\t\tGame Over\n"
-      puts "\n" * 2
-      puts SproutSimulator::Plants::PlantAsciiArt3
+      puts "#{SproutSimulator::Plants::PlantAsciiArt3}\n\n\t\tGame Over\n"
     end
     end_game_condition!
   end
